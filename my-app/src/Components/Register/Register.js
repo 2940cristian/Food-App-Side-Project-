@@ -23,6 +23,12 @@ class Register extends Component {
         }
     }
 
+    handleInputChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
 
 
     render() {
@@ -35,8 +41,8 @@ class Register extends Component {
 
                     <div className="form">
                         <form>
-                            <input  type="text" name="email" placeholder="Email:"/>
-                            <input  type={this.state.type} name="password" placeholder="Password:"/>
+                            <input onChange={this.handleInputChange}  type="text" name="email" placeholder="Email:"/>
+                            <input onChange={this.handleInputChange}  type={this.state.type} name="password" placeholder="Password:"/>
 
                             <div className="register--checkbox">
                                 <input onClick={() => {
