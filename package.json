@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.4"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "name": "FoodApp",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2940cristian/Food-App-Side-Project-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2940cristian/Food-App-Side-Project-/issues"
+  },
+  "homepage": "https://github.com/2940cristian/Food-App-Side-Project-#readme",
+  "description": ""
+}
