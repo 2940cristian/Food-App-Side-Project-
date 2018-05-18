@@ -1,6 +1,7 @@
 // Modules
 const express = require("express");
-const server = express()
+const mongoose = require("mongoose")
+const server = express();
 
 
 //Database
@@ -10,7 +11,6 @@ const server = express()
 
 
 //Route handers
-
 server.get("/", (req, res) => {
     res.send("API RUNNING")
 })
