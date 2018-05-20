@@ -1,11 +1,12 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
-import "../Register/Register.css"
+import "../Register/Register.css";
+import axios from "axios";
 class Register extends Component {
     constructor() {
         super()
         this.state = {
-            email: "",
+            username: "",
             password: "",
             type: "password"
         }
@@ -29,6 +30,28 @@ class Register extends Component {
         })
     }
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+        
+        if(this.state.username < 1 || this.state.password < 1) {
+            alert("Please fill in the username an password");
+            return;
+        }
+
+        const newUser = {
+            username: this.state.username,
+            password: this.state.password
+        }
+
+        axios.post("http://localhost:5000/register", newUser)
+        .then(success => {
+            alert("New User Created");
+        }).catch(err => {
+            console.log(err);
+            alert("Error creating user")
+        })
+    }
+
 
 
     render() {
@@ -40,8 +63,8 @@ class Register extends Component {
                     </div>
 
                     <div className="form">
-                        <form>
-                            <input onChange={this.handleInputChange}  type="text" name="email" placeholder="Email:"/>
+                        <form onSubmit={this.handleSubmit}>
+                            <input onChange={this.handleInputChange}  type="text" name="username" placeholder="Username:"/>
                             <input onChange={this.handleInputChange}  type={this.state.type} name="password" placeholder="Password:"/>
 
                             <div className="register--checkbox">

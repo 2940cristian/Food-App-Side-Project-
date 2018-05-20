@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose")
 const server = express();
 const User = require("./Users/UserSchema")
+const cors = require("cors");
 
 
 //Database
@@ -16,8 +17,13 @@ mongoose.connect("mongodb://localhost/foodAppUsers")
 
 
 //Middleware
+const corsOptions = {
+    origin: "http://localhost:3000/",
+    optionsSuccessStatus: 200
+}
 
 server.use(express.json())
+server.use(cors())
 
 
 //Route handers
