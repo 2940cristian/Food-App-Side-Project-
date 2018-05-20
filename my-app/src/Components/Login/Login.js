@@ -1,12 +1,11 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
-import "../Register/Register.css";
-import axios from "axios";
+import axios from "axios"
+import "../Login/Login.css";
 
-
-class Register extends Component {
+class Login extends Component {
     constructor() {
-        super()
+        super();
+
         this.state = {
             username: "",
             password: "",
@@ -40,17 +39,17 @@ class Register extends Component {
             return;
         }
 
-        const newUser = {
+        const user = {
             username: this.state.username,
             password: this.state.password
         }
 
-        axios.post("http://localhost:5000/register", newUser)
+        axios.post("http://localhost:5000/login", user)
         .then(success => {
-            alert("New User Created");
+            alert(success.data)
         }).catch(err => {
             console.log(err);
-            alert("Error creating user")
+            alert("Failed Login")
         })
     }
 
@@ -61,7 +60,7 @@ class Register extends Component {
             <div className="body">
                 <div className="container">
                     <div className="register--header">
-                        <h2>Fill out the form below</h2>
+                        <h2>Login</h2>
                     </div>
 
                     <div className="form">
@@ -85,4 +84,5 @@ class Register extends Component {
     }
 }
 
-export default Register
+
+export default Login

@@ -1,0 +1,51 @@
+.body {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(255, 220, 230)
+}
+
+.container {
+    width: 60%;
+    margin: 0 auto;
+    background-color: rgb(218, 253, 207);
+    position: relative;
+    top: 10vh;
+}
+
+.register--header {
+    font-size: 2.3em;
+    text-align: center;
+    padding-top: 6%;
+}
+
+.form {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 4vh;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form input {
+    margin-bottom: 5%;
+    height: 7vh;
+}
+
+.register--checkbox { 
+    display: flex;
+}
+
+.register--checkbox p { 
+    position: relative;
+    top: 2vh;
+    padding-left: 2%;
+    width: 70%;
+}
+button {
+    font-size: 1.3rem;
+    height: 7vh;
+    margin-bottom: 13%;
+}
