@@ -41,4 +41,29 @@ server.post('/register', (req, res) => {
     });
   });
 
+  server.post("/login", (req, res) => {
+      const {username, password} = req.body;
+
+      User.findOne({username}, (err, user) => {
+          if(err) {
+              res.status(400).send("No user found")
+              return;
+          }
+          if(user === null) {
+              res.status(422).send("No user found")
+          }
+
+          user.checkPassword(password, (noMatch, hashMatch) => {
+              if(noMatch !== null) {
+                res.status(422).json({ error: 'passwords dont match' });
+                return;
+              }
+
+              if(hashMatch) {
+                  res.send("Logged in")
+              }
+          })
+      })
+  })
+
 server.listen(5000, () => {console.log("Server listening on port 5000")})
