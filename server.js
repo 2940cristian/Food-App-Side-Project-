@@ -31,24 +31,13 @@ server.get("/", (req, res) => {
     res.send("API RUNNING")
 })
 
-// server.post('/register', (req, res) => {
-//     // const { username, password } = req.body;
-//     res.send(req.body)
-//     // const user = new User({username, password});
-
-//     // user.save((err, user) => {
-//     //     if(err) return res.send(err);
-//     //     res.send("User has been created")
-//     // })
-// })
-
 server.post('/register', (req, res) => {
     const { username, password } = req.body;
     const user = new User({ username, password });
   
     user.save((err, user) => {
       if (err) return res.send(err);
-      res.send("Success")
+      res.send(user)
     });
   });
 
