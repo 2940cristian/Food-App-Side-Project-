@@ -41,26 +41,27 @@ server.post('/register', (req, res) => {
     });
   });
 
-  server.post("/login", (req, res) => {
+  server.post("/login", (req, res, next) => {
       const {username, password} = req.body;
 
       User.findOne({username}, (err, user) => {
           if(err) {
-              res.status(400).send("No user found")
-              return;
+            res.status(403).json({ error: 'Invalid Username/Password' });
+            return;
           }
           if(user === null) {
-              res.status(422).send("No user found")
+            res.status(422).json({ error: 'No user with that username in our DB' });
+            return;
           }
 
           user.checkPassword(password, (noMatch, hashMatch) => {
-              if(noMatch !== null) {
-                res.status(422).json({ error: 'passwords dont match' });
-                return;
+              
+            if(hashMatch) {
+                  res.send("Logged in")
               }
 
-              if(hashMatch) {
-                  res.send("Logged in")
+              else {
+                  res.status(422).json({error: "Passwords do not match"})
               }
           })
       })
