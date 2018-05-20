@@ -46,7 +46,8 @@ class Login extends Component {
 
         axios.post("http://localhost:5000/login", user)
         .then(success => {
-            alert(success.data)
+            console.log(success)
+            localStorage.setItem("token", success.data.token)
         }).catch(err => {
             console.log(err);
             alert("Failed Login")

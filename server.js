@@ -34,16 +34,18 @@ server.get("/", (req, res) => {
     res.send("API RUNNING")
 })
 
-server.post("/restricted", (req, res) => {
+server.get("/restricted", (req, res) => {
     const token = req.headers.authorization
     if(token) {
         console.log(token)
         jwt.verify(token, secret, (err, success) =>  {
             if(err) {
-                return res.json({error:"Faled authentication"})
+                return res.json({Message:"Faled authentication"})
             } else {
                 req.decoded = success;
-                res.send("authenticated")
+                res.status(200).json({
+                    Message: "Authenticated!"
+                })
             }
         })
     } else {
