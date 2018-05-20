@@ -2,8 +2,9 @@
 const express = require("express");
 const mongoose = require("mongoose")
 const server = express();
-const User = require("./Users/UserSchema")
+const User = require("./Users/UserSchema");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 
 
 //Database
@@ -22,6 +23,8 @@ const corsOptions = {
     optionsSuccessStatus: 200
 }
 
+const secret = "suprtSecret"
+
 server.use(express.json())
 server.use(cors())
 
@@ -29,6 +32,23 @@ server.use(cors())
 //Route handers
 server.get("/", (req, res) => {
     res.send("API RUNNING")
+})
+
+server.post("/restricted", (req, res) => {
+    const token = req.headers.authorization
+    if(token) {
+        console.log(token)
+        jwt.verify(token, secret, (err, success) =>  {
+            if(err) {
+                return res.json({error:"Faled authentication"})
+            } else {
+                req.decoded = success;
+                res.send("authenticated")
+            }
+        })
+    } else {
+        return res.status(403).json({error: "No token"})
+    }
 })
 
 server.post('/register', (req, res) => {
@@ -57,7 +77,12 @@ server.post('/register', (req, res) => {
           user.checkPassword(password, (noMatch, hashMatch) => {
               
             if(hashMatch) {
-                  res.send("Logged in")
+                const token = jwt.sign({user}, secret);
+                // console.log(token);
+                res.json({
+                    message: "Signed in",
+                    token: token
+                })
               }
 
               else {
